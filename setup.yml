@@ -1,0 +1,30 @@
+- hosts: nginx
+  become: true
+  tasks:
+    - name: Update and install NGINX
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Start NGINX service
+      service:
+        name: nginx
+        state: started
+        enabled: true
+
+- hosts: php_fpm
+  become: true
+  tasks:
+    - name: Update and install PHP-FPM
+      apt:
+        name: php-fpm
+        state: present
+        update_cache: yes
+
+    - name: Start PHP-FPM service
+      service:
+        name: php7.4-fpm  # Change en fonction de la version de PHP-FPM disponible
+        state: started
+        enabled: true
+
